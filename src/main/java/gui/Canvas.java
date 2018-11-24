@@ -6,12 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-// Scene?
 public class Canvas extends JPanel {
     private ArrayList<Line2D> lines;
 
-    // FIXME: w przyszlosci powinno brac obiekty 2d
-    // do narysowania
+    // FIXME: powinien brac Scene
     public Canvas(ArrayList<Line2D> lines) {
         this.lines = lines;
     }
@@ -20,6 +18,7 @@ public class Canvas extends JPanel {
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
 
+        // FIXME: scene.draw(graphics)
         for (Line2D line: lines) {
             line.draw(graphics);
         }
