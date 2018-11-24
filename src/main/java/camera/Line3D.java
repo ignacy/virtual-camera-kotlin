@@ -1,6 +1,6 @@
 package camera;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class Line3D {
     private ArrayList<Point3D> points;
