@@ -2,8 +2,8 @@ package camera;
 
 public class Camera {
     private double planeDistance;
-    private final int HEIGHT = 600;
-    private final int WIDTH = 600;
+    public static final int HEIGHT = 600;
+    public static final int WIDTH = 600;
     private double y;
 
     public Camera(double planeDistance, double y) {
