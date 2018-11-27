@@ -8,6 +8,7 @@ import java.awt.*
 
 class Application : JFrame() {
     init {
+        this.isResizable = false
         this.title = "Wirtualna Kamera"
         this.setSize(800, 800)
         this.setLocationRelativeTo(null)
