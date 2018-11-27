@@ -1,20 +1,15 @@
 import camera.*
 import gui.Canvas
 import gui.KeyHandler
+import gui.Session
 
 import javax.swing.*
 import java.awt.*
-import java.awt.event.KeyEvent
-import java.awt.event.KeyListener
 
 class Application : JFrame() {
-    private val canvas : JPanel
-    private var scene : Scene
-
     init {
-
         this.title = "Wirtualna Kamera"
-        this.setSize(600, 600)
+        this.setSize(800, 800)
         this.setLocationRelativeTo(null)
         this.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
 
@@ -22,12 +17,14 @@ class Application : JFrame() {
                 Cuboid(Point3D(25.0, 250.0, -50.0), 100, Color.decode("#3D9970")),
                 Cuboid(Point3D(-200.0, 250.0, -100.0), 150, Color.decode("#85144b"))
         )
+
         val camera = Camera(200.0, 0.0)
+        val scene = Scene(objects)
+        val canvas = Canvas(scene, camera)
 
-        scene = Scene(objects)
-        canvas = Canvas(scene, camera)
+        val session = Session(camera, scene, canvas)
 
-        this.addKeyListener(KeyHandler(scene, camera, canvas))
+        this.addKeyListener(KeyHandler(session))
         this.add(canvas)
     }
 

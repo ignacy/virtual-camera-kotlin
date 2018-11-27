@@ -1,11 +1,10 @@
 package gui
 
 import camera.Camera
-import camera.Scene
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
-class KeyHandler(public var scene : Scene, val camera: Camera, private val canvas: Canvas) : KeyListener {
+class KeyHandler(public var session: Session) : KeyListener {
         override fun keyTyped(e: KeyEvent?) {
         }
 
@@ -14,13 +13,12 @@ class KeyHandler(public var scene : Scene, val camera: Camera, private val canva
 
         override fun keyPressed(e: KeyEvent?) {
             if (e!!.keyChar == 'z') {
-                scene = scene.rotateZLeft(this.camera)
+                session.scene.rotateZLeft(session.camera)
             }
 
             if (e.keyChar == 'x') {
                 // rotate arround Z right
             }
-            canvas.scene = scene
-            canvas.repaint()
+            session.canvas.repaint()
         }
 }

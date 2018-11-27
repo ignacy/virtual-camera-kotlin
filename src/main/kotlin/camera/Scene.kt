@@ -3,10 +3,10 @@ package camera
 import algebra.Matrix
 import java.awt.Graphics
 
-class Scene(private val objects: List<Cuboid>) {
+class Scene(private var objects: List<Cuboid>) {
     companion object {
-        val HEIGHT = 600
-        val WIDTH = 600
+        val HEIGHT = 800
+        val WIDTH = 800
     }
 
     val x = HEIGHT / 2
@@ -16,7 +16,7 @@ class Scene(private val objects: List<Cuboid>) {
         objects.map { it.draw(graphics, camera, this) }
     }
 
-    fun rotateZLeft(camera: Camera): Scene {
+    fun rotateZLeft(camera: Camera) {
         var r = Matrix.identity()
         r.multiple(Matrix.makeRotationZMatrix(0.1, camera.y))
 
@@ -30,7 +30,7 @@ class Scene(private val objects: List<Cuboid>) {
         t.multiple(r)
 
         val cuboids = multiplyObjects(t)
-        return Scene(cuboids)
+        this.objects = cuboids
     }
 
     fun multiplyObjects(translation : Matrix) : List<Cuboid> {
