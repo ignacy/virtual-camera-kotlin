@@ -1,6 +1,7 @@
 package camera
 
 import algebra.Matrix
+import gui.DrawingContext
 import java.awt.Graphics
 
 class Scene(private var objects: List<Cuboid>) {
@@ -12,8 +13,8 @@ class Scene(private var objects: List<Cuboid>) {
     val x = HEIGHT / 2
     val z = WIDTH / 2
 
-    fun draw(graphics: Graphics, camera: Camera) {
-        objects.map { it.draw(graphics, camera, this) }
+    fun draw(context: DrawingContext) {
+        objects.map { it.draw(context) }
     }
 
     fun rotateZLeft(camera: Camera) {

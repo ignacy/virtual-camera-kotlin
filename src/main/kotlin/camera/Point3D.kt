@@ -1,15 +1,16 @@
 package camera
 
 import algebra.Matrix
+import gui.DrawingContext
 import java.awt.Graphics
 
 class Point3D(val x: Double, val y: Double, val z: Double) {
     private val vector: DoubleArray = doubleArrayOf(x, y, z, 1.0)
 
-    fun transform(camera: Camera, scene: Scene): Point2D {
-        val k = camera.planeDistance / (this.y - camera.y)
-        val newX = (k * this.x + scene.x)
-        val newZ = (scene.z - k * this.z)
+    fun transform(context: DrawingContext): Point2D {
+        val k = context.camera.planeDistance / (this.y - context.camera.y)
+        val newX = (k * this.x + context.scene.x)
+        val newZ = (context.scene.z - k * this.z)
         return Point2D(newX, newZ)
     }
 

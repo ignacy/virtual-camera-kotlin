@@ -16,6 +16,6 @@ class Canvas (var scene: Scene, private val camera: Camera) : JPanel() {
         super.paintComponent(graphics)
         super.setBackground(Color.decode("#dae1e7"))
         graphics.drawRect(0, 0, Scene.HEIGHT, Scene.WIDTH)
-        scene.draw(graphics, camera)
+        DrawingContext(graphics, scene, camera).draw()
     }
 }

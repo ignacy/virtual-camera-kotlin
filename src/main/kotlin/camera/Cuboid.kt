@@ -1,6 +1,7 @@
 package camera
 
 import algebra.Matrix
+import gui.DrawingContext
 import java.awt.Color
 import java.awt.Graphics
 import javax.swing.DebugGraphics
@@ -33,8 +34,8 @@ class Cuboid {
         )
     }
 
-    fun draw(graphics: Graphics, camera: Camera, scene: Scene) {
-        this.lines.map { it.draw(graphics, camera, scene, this.color) }
+    fun draw(context: DrawingContext) {
+        this.lines.map { it.draw(context, this.color) }
     }
 
     fun multiplyLines(translation: Matrix): Cuboid {
