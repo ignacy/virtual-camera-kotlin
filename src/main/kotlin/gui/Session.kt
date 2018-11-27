@@ -13,4 +13,8 @@ class Session(var camera : Camera, var scene : Scene, var canvas : Canvas) {
         this.scene.rotateZLeft(this.camera)
     }
 
+    fun rotateRight() {
+        this.scene.rotateZRight(this.camera)
+    }
+
 }

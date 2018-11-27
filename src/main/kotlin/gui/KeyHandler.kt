@@ -13,7 +13,7 @@ class KeyHandler(var session: Session) : KeyListener {
         override fun keyPressed(e: KeyEvent?) {
             when(e!!.keyChar) {
                 'z' -> session.rotateLeft()
-                'x' -> session.rotateLeft()
+                'x' -> session.rotateRight()
             }
             session.repaint()
         }
