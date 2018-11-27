@@ -8,7 +8,16 @@ class Cuboid (private val point : Point3D, private val length : Int, val color :
             Line3D(point, Point3D(point.x, point.y + length, point.z)),
             Line3D(point, Point3D(point.x, point.y, point.z + length)),
             Line3D(point, Point3D(point.x + length, point.y, point.z)),
-            Line3D(Point3D(point.x, point.y + length, point.z), Point3D(point.x + length, point.y + length, point.z))
+            Line3D(Point3D(point.x, point.y + length, point.z), Point3D(point.x, point.y + length, point.z + length)),
+            Line3D(Point3D(point.x, point.y + length, point.z), Point3D(point.x + length, point.y + length, point.z)),
+            Line3D(Point3D(point.x + length, point.y + length, point.z), Point3D(point.x + length, point.y + length, point.z +length)),
+            Line3D(Point3D(point.x + length, point.y + length, point.z + length), Point3D(point.x + length, point.y + length, point.z +length)),
+            Line3D(Point3D(point.x + length, point.y + length, point.z + length), Point3D(point.x + length, point.y, point.z +length)),
+            Line3D(Point3D(point.x, point.y + length, point.z + length), Point3D(point.x, point.y, point.z + length)),
+            Line3D(Point3D(point.x, point.y + length, point.z + length), Point3D(point.x + length, point.y +length, point.z + length)),
+            Line3D(Point3D(point.x, point.y, point.z + length), Point3D(point.x + length, point.y, point.z + length)),
+            Line3D(Point3D(point.x + length, point.y, point.z), Point3D(point.x + length, point.y, point.z + length)),
+            Line3D(Point3D(point.x + length, point.y, point.z), Point3D(point.x + length, point.y + length, point.z))
     )
 
     fun draw(graphics: Graphics, camera: Camera, scene: Scene) {

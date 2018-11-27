@@ -14,9 +14,9 @@ class Application {
         frame.setLocationRelativeTo(null)
         frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
 
-        val cuboid = Cuboid(Point3D(250.0, 250.0, 200.0), 100, "#22ee44")
+        val cuboid = Cuboid(Point3D(25.0, 250.0, -50.0), 100, "#22ee44")
         val objects = listOf(cuboid)
-        val camera = Camera(300.0, 0.0)
+        val camera = Camera(200.0, 0.0)
 
         val scene = Scene(objects)
         canvas = Canvas(scene, camera)
