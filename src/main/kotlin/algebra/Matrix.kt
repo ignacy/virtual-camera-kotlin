@@ -2,6 +2,10 @@ package algebra
 
 class Matrix(private val m: Array<Array<Double>>) {
     companion object {
+        fun zeros(rows : Int, cols : Int) : Matrix {
+            return Matrix(Array(rows) { Array(cols) { 0.0 } })
+        }
+
         fun identity() : Matrix {
             return Matrix(
                     arrayOf(
@@ -34,14 +38,13 @@ class Matrix(private val m: Array<Array<Double>>) {
     fun at(row: Int, col: Int) = m!![row][col]
 
     fun multiple(p: Matrix) : Matrix {
-        val x = Array(4) { Array(4) { 0.0 } }
-        val y = p.m
-        for (w in 0..3) {
-            for (k in 0..3) {
-                x[w][k] = y!![w][0] * m!![0][k] + y[w][1] * m!![1][k] + y[w][2] * m!![2][k] + y[w][3] * m!![3][k]
+        val x = Matrix.zeros(4, 4)
+        for (row in 0..3) {
+            for (col in 0..3) {
+                x.setAt(row, col, p.at(row, 0) * this.at(0, col) + p.at(row, 1) * this.at(1, col) + p.at(row, 2) * this.at(2, col) + p.at(row, 3) * this.at(3, col))
             }
         }
-        return Matrix(x)
+        return x
     }
 
 
