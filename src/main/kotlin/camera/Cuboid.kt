@@ -1,9 +1,10 @@
 package camera
 
+import java.awt.Color
 import java.awt.Graphics
 import javax.swing.DebugGraphics
 
-class Cuboid (private val point : Point3D, private val length : Int, val color : String) {
+class Cuboid (private val point : Point3D, private val length : Int, val color : Color) {
     fun lines() = listOf<Line3D> (
             Line3D(point, Point3D(point.x, point.y + length, point.z)),
             Line3D(point, Point3D(point.x, point.y, point.z + length)),
@@ -21,6 +22,6 @@ class Cuboid (private val point : Point3D, private val length : Int, val color :
     )
 
     fun draw(graphics: Graphics, camera: Camera, scene: Scene) {
-        lines().map { it.draw(graphics, camera, scene) }
+        lines().map { it.draw(graphics, camera, scene, color) }
     }
 }

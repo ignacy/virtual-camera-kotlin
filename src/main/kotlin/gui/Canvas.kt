@@ -12,6 +12,7 @@ import javax.swing.border.Border
 class Canvas (private val scene: Scene, private val camera: Camera) : JPanel() {
     override fun paintComponent(graphics: Graphics) {
         super.paintComponent(graphics)
+        super.setBackground(Color.decode("#dae1e7"))
         graphics.drawRect(0, 0, Scene.HEIGHT, Scene.WIDTH)
         graphics.drawOval(0, 0, 50, 50)
         scene.draw(graphics, camera)
