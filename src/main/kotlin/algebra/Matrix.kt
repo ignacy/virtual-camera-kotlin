@@ -35,13 +35,20 @@ class Matrix(private val m: Array<Array<Double>>) {
         m!![w][k] = d
     }
 
+    fun rows() = m.size
+
+    fun cols() = m[0].size
+
     fun at(row: Int, col: Int) = m!![row][col]
 
     fun multiple(p: Matrix) : Matrix {
         val x = Matrix.zeros(4, 4)
-        for (row in 0..3) {
-            for (col in 0..3) {
-                x.setAt(row, col, p.at(row, 0) * this.at(0, col) + p.at(row, 1) * this.at(1, col) + p.at(row, 2) * this.at(2, col) + p.at(row, 3) * this.at(3, col))
+
+        for (i in 0 until this.rows()) {
+            for (j in 0 until p.cols()) {
+                for (k in 0 until this.cols()) {
+                    x.setAt(i, j, x.at(i, j) + this.at(i, k) * p.at(k, j))
+                }
             }
         }
         return x
