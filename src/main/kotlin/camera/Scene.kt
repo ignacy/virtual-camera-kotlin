@@ -1,10 +1,10 @@
 package camera
 
-import java.util.ArrayList
+import java.awt.Graphics
 
-class Scene(private val lines: ArrayList<Line3D>) {
-    private val x: Int
-    private val z: Int
+class Scene(private val objects: List<Cuboid>) {
+    val x: Int
+    val z: Int
 
     init {
         this.x = WIDTH / 2
@@ -16,4 +16,7 @@ class Scene(private val lines: ArrayList<Line3D>) {
         val WIDTH = 600
     }
 
+    fun draw(graphics: Graphics, camera: Camera) {
+        objects.map { it.draw(graphics, camera, this) }
+    }
 }
