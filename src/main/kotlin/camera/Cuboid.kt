@@ -3,8 +3,6 @@ package camera
 import algebra.Matrix
 import gui.DrawingContext
 import java.awt.Color
-import java.awt.Graphics
-import javax.swing.DebugGraphics
 
 class Cuboid {
     var lines : List<Line3D> = emptyList()

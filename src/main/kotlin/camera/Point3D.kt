@@ -2,7 +2,6 @@ package camera
 
 import algebra.Matrix
 import gui.DrawingContext
-import java.awt.Graphics
 
 class Point3D(val x: Double, val y: Double, val z: Double) {
     private val vector: DoubleArray = doubleArrayOf(x, y, z, 1.0)

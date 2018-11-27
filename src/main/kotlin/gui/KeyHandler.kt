@@ -1,10 +1,9 @@
 package gui
 
-import camera.Camera
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
-class KeyHandler(public var session: Session) : KeyListener {
+class KeyHandler(var session: Session) : KeyListener {
         override fun keyTyped(e: KeyEvent?) {
         }
 

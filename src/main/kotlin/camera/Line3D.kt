@@ -3,10 +3,6 @@ package camera
 import algebra.Matrix
 import gui.DrawingContext
 import java.awt.Color
-import java.awt.Graphics
-import java.util.ArrayList
-import java.awt.BasicStroke
-import java.awt.Graphics2D
 
 
 
@@ -15,13 +11,9 @@ class Line3D(private val start: Point3D, private val end: Point3D) {
         val transformedStart = start.transform(context)
         val transformedEnd = end.transform(context)
 
-        val g2 = context.graphics as Graphics2D
-        g2.stroke = BasicStroke(3f)
-
-        g2.color = color
-
+        context.graphics.color = color
         if (context.camera.isVisible(end) && context.camera.isVisible(start)) {
-            g2.drawLine(
+            context.graphics.drawLine(
                     transformedStart.x.toInt(),
                     transformedStart.y.toInt(),
                     transformedEnd.x.toInt(),

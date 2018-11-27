@@ -2,7 +2,6 @@ package camera
 
 import algebra.Matrix
 import gui.DrawingContext
-import java.awt.Graphics
 
 class Scene(private var objects: List<Cuboid>) {
     companion object {
