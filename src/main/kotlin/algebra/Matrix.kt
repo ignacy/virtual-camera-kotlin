@@ -37,15 +37,15 @@ class Matrix {
         m!![w][k] = d
     }
 
-    fun multiple(p: Matrix) {
-        val x = Array(4) { arrayOf(0.0, 0.0, 0.0, 0.0) }
+    fun multiple(p: Matrix) : Matrix {
+        val x = Array(4) { Array(4) { 0.0 } }
         val y = p.m
         for (w in 0..3) {
             for (k in 0..3) {
                 x[w][k] = y!![w][0] * m!![0][k] + y[w][1] * m!![1][k] + y[w][2] * m!![2][k] + y[w][3] * m!![3][k]
             }
         }
-        m = x.clone()
+        return Matrix(x)
     }
 
 
