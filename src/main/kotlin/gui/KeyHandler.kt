@@ -11,12 +11,9 @@ class KeyHandler(var session: Session) : KeyListener {
         }
 
         override fun keyPressed(e: KeyEvent?) {
-            if (e!!.keyChar == 'z') {
-                session.rotateLeft()
-            }
-
-            if (e.keyChar == 'x') {
-                // rotate arround Z right
+            when(e!!.keyChar) {
+                'z' -> session.rotateLeft()
+                'x' -> session.rotateLeft()
             }
             session.repaint()
         }
