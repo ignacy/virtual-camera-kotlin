@@ -13,12 +13,12 @@ class KeyHandler(public var session: Session) : KeyListener {
 
         override fun keyPressed(e: KeyEvent?) {
             if (e!!.keyChar == 'z') {
-                session.scene.rotateZLeft(session.camera)
+                session.rotateLeft()
             }
 
             if (e.keyChar == 'x') {
                 // rotate arround Z right
             }
-            session.canvas.repaint()
+            session.repaint()
         }
 }
