@@ -29,6 +29,17 @@ class Matrix(private val m: Array<Array<Double>>) {
             m.setAt(1, 3, (cos - 1) * sceneY)
             return m
         }
+
+        fun makeRotationYMatrix(fi: Double, sceneY: Double): Matrix {
+            val m = this.identity()
+            val cos = java.lang.Math.cos(fi)
+            val sin = java.lang.Math.sin(fi)
+            m.setAt(0, 0, cos);
+            m.setAt(2, 2, cos);
+            m.setAt(0, 2, sin);
+            m.setAt(2, 0, -sin);
+            return m;
+        }
     }
 
     fun setAt(w: Int, k: Int, d: Double) {
