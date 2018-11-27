@@ -21,7 +21,7 @@ class Scene(private var objects: List<Cuboid>) {
         var t = Matrix.identity().multiple(r)
         val v = arrayOf(0.0, 0.0, 0.0)
         for (w in 0..2)
-            t.setVal(w, 3, v[w])
+            t.setAt(w, 3, v[w])
 
         val cuboids = multiplyObjects(t)
         this.objects = cuboids
