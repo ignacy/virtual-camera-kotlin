@@ -1,18 +1,22 @@
 import camera.*
 import gui.Canvas
+import gui.KeyHandler
 
 import javax.swing.*
 import java.awt.*
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
 
-class Application {
-    private val frame: JFrame = JFrame()
-    private val canvas: JPanel
+class Application : JFrame() {
+    private val canvas : JPanel
+    private var scene : Scene
 
     init {
-        frame.title = "Wirtualna Kamera"
-        frame.setSize(600, 600)
-        frame.setLocationRelativeTo(null)
-        frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+
+        this.title = "Wirtualna Kamera"
+        this.setSize(600, 600)
+        this.setLocationRelativeTo(null)
+        this.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
 
         val objects = listOf(
                 Cuboid(Point3D(25.0, 250.0, -50.0), 100, Color.decode("#3D9970")),
@@ -20,13 +24,15 @@ class Application {
         )
         val camera = Camera(200.0, 0.0)
 
-        val scene = Scene(objects)
+        scene = Scene(objects)
         canvas = Canvas(scene, camera)
-        frame.add(canvas)
+
+        this.addKeyListener(KeyHandler(scene, camera, canvas))
+        this.add(canvas)
     }
 
     fun start() {
-        frame.isVisible = true
+        this.isVisible = true
     }
 }
 

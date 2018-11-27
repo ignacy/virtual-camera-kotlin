@@ -1,5 +1,6 @@
 package camera
 
+import algebra.Matrix
 import java.awt.Color
 import java.awt.Graphics
 import java.util.ArrayList
@@ -19,5 +20,12 @@ class Line3D(private val start: Point3D, private val end: Point3D) {
                     transformedEnd.y.toInt()
             )
         }
+    }
+
+    fun multiplyPoints(translation: Matrix): Line3D {
+        return Line3D(
+                start.multiply(translation),
+                end.multiply(translation)
+        )
     }
 }
