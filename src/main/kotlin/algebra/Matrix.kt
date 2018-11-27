@@ -1,7 +1,5 @@
 package algebra
 
-import camera.Scene
-
 class Matrix {
     var m: Array<Array<Double>>? = null
 
@@ -23,17 +21,14 @@ class Matrix {
 
        fun makeRotationZMatrix(fi: Double, sceneY : Double): Matrix {
             val m = this.identity()
-            val cos: Double
-            val sin: Double
-            val c = sceneY
-            cos = java.lang.Math.cos(fi)
-            sin = java.lang.Math.sin(fi)
+            val cos = java.lang.Math.cos(fi)
+            val sin = java.lang.Math.sin(fi)
             m.setVal(0, 0, cos)
             m.setVal(1, 1, cos)
             m.setVal(1, 0, sin)
             m.setVal(0, 1, -sin)
-            m.setVal(0, 3, (-1).toDouble() * sin * c)
-            m.setVal(1, 3, (cos - 1) * c)
+            m.setVal(0, 3, (-1).toDouble() * sin * sceneY)
+            m.setVal(1, 3, (cos - 1) * sceneY)
             return m
         }
     }
@@ -43,7 +38,7 @@ class Matrix {
     }
 
     fun multiple(p: Matrix) {
-        val x = Array<Array<Double>>(4) { arrayOf(0.0, 0.0, 0.0, 0.0) }
+        val x = Array(4) { arrayOf(0.0, 0.0, 0.0, 0.0) }
         val y = p.m
         for (w in 0..3) {
             for (k in 0..3) {
