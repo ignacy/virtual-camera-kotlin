@@ -13,10 +13,7 @@ class KeyHandler(public var scene : Scene, val camera: Camera, private val canva
         }
 
         override fun keyPressed(e: KeyEvent?) {
-            println("JHELLLO")
             if (e!!.keyChar == 'z') {
-                // rotate arround Z left
-                println("Z")
                 scene = scene.rotateZLeft(this.camera)
             }
 
