@@ -14,7 +14,7 @@ class Point3D(val x: Double, val y: Double, val z: Double) {
     }
 
     fun multiply(translation: Matrix): Point3D {
-        val result = Matrix(arrayOf(arrayOf(x, y, z, 1.0))).multiple(translation)
+        val result = Matrix.vector(x, y, z, 1.0).multiple(translation)
         // TODO: replace with result.normalize()
         return Point3D(
                 result.at(0, 0) / result.at(0,3),

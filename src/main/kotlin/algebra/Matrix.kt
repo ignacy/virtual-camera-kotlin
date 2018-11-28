@@ -6,6 +6,10 @@ class Matrix(private val m: Array<Array<Double>>) {
             return Matrix(Array(rows) { Array(cols) { 0.0 } })
         }
 
+        fun vector(vararg values : Double) : Matrix {
+            return Matrix(arrayOf(values.toTypedArray()))
+        }
+
         fun identity() : Matrix {
             return Matrix(
                     arrayOf(
