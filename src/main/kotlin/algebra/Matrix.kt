@@ -52,7 +52,7 @@ class Matrix(private val m: Array<Array<Double>>) {
     fun at(row: Int, col: Int) = m!![row][col]
 
     fun multiple(b: Matrix) : Matrix {
-        val result = Matrix.zeros(4, 4)
+        val result = Matrix.zeros(this.rows(), b.cols())
 
         for (i in 0 until this.rows()) {
             for (j in 0 until b.cols()) {
