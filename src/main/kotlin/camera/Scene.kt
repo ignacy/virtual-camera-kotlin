@@ -17,33 +17,29 @@ class Scene(private var objects: List<Cuboid>) {
         objects.map { it.draw(context) }
     }
 
-    fun rotateZLeft() {
-        var r = Matrix.identity().multiple(Matrix.zRotation(-Scene.ANGULAR_STEP))
-        val cuboids = multiplyObjects(r)
-        this.objects = cuboids
-    }
-
-    fun rotateZRight() {
-        var r = Matrix.identity().multiple(Matrix.zRotation(Scene.ANGULAR_STEP))
-        val cuboids = multiplyObjects(r)
-        this.objects = cuboids
-    }
-
-    fun multiplyObjects(translation : Matrix) : List<Cuboid> {
-        return objects.map {
-            it.multiplyLines(translation)
-        }
-    }
-
     fun rotateYRight() {
-        var r = Matrix.identity().multiple(Matrix.yRotation(Scene.ANGULAR_STEP))
-        val cuboids = multiplyObjects(r)
+        val cuboids = multiplyObjects(Matrix.yRotation(Scene.ANGULAR_STEP))
         this.objects = cuboids
     }
 
     fun rotateYLeft() {
-        var r = Matrix.identity().multiple(Matrix.yRotation(-Scene.ANGULAR_STEP))
-        val cuboids = multiplyObjects(r)
+        val cuboids = multiplyObjects(Matrix.yRotation(-Scene.ANGULAR_STEP))
         this.objects = cuboids
+    }
+
+    fun rotateZLeft() {
+        val cuboids = multiplyObjects(Matrix.zRotation(-Scene.ANGULAR_STEP))
+        this.objects = cuboids
+    }
+
+    fun rotateZRight() {
+        val cuboids = multiplyObjects(Matrix.zRotation(Scene.ANGULAR_STEP))
+        this.objects = cuboids
+    }
+    
+    fun multiplyObjects(translation : Matrix) : List<Cuboid> {
+        return objects.map {
+            it.multiplyLines(translation)
+        }
     }
 }
