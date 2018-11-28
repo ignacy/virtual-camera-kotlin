@@ -58,9 +58,20 @@ class Scene(private var objects: List<Cuboid>) {
         this.objects = cuboids
     }
 
+    fun moveUp() {
+        val cuboids = multiplyObjects(Matrix.moveUp(Scene.LINEAR_STEP))
+        this.objects = cuboids
+    }
+
+    fun moveDown() {
+        val cuboids = multiplyObjects(Matrix.moveDown(Scene.LINEAR_STEP))
+        this.objects = cuboids
+    }
+
     fun multiplyObjects(translation : Matrix) : List<Cuboid> {
         return objects.map {
             it.multiplyLines(translation)
         }
     }
+
 }

@@ -41,4 +41,12 @@ class Session(var camera : Camera, var scene : Scene, var canvas : Canvas) {
         this.scene.moveRight()
     }
 
+    fun moveUp() {
+        this.scene.moveUp()
+    }
+
+    fun moveDown() {
+        this.scene.moveDown()
+    }
+
 }
