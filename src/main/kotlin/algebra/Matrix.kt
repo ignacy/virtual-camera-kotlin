@@ -39,6 +39,24 @@ class Matrix(private val m: Array<Array<Double>>) {
                     arrayOf(0.0, 0.0, 0.0, 1.0)
             ))
         }
+
+        fun moveLeft(step: Double): Matrix {
+            return Matrix(arrayOf(
+                    arrayOf(1.0, 0.0, 0.0, -step),
+                    arrayOf(0.0, 1.0, 0.0, 0.0),
+                    arrayOf(0.0, 0.0, 1.0, 0.0),
+                    arrayOf(0.0, 0.0, 0.0, 1.0)
+            ))
+        }
+
+        fun moveRight(step: Double): Matrix {
+            return Matrix(arrayOf(
+                    arrayOf(1.0, 0.0, 0.0, step),
+                    arrayOf(0.0, 1.0, 0.0, 0.0),
+                    arrayOf(0.0, 0.0, 1.0, 0.0),
+                    arrayOf(0.0, 0.0, 0.0, 1.0)
+            ))
+        }
     }
 
     fun setAt(w: Int, k: Int, d: Double) {

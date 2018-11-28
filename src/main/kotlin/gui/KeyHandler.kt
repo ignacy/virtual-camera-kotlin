@@ -19,6 +19,11 @@ class KeyHandler(var session: Session) : KeyListener {
                 'b' -> session.rotateXLeft()
                 'n' -> session.rotateXRight()
             }
+
+            when(e.keyCode) {
+                KeyEvent.VK_LEFT -> session.moveLeft()
+                KeyEvent.VK_RIGHT -> session.moveRight()
+            }
             session.repaint()
         }
 }

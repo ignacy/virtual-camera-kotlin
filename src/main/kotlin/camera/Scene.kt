@@ -8,6 +8,7 @@ class Scene(private var objects: List<Cuboid>) {
         const val HEIGHT = 800
         const val WIDTH = 800
         const val ANGULAR_STEP = 0.1
+        const val LINEAR_STEP = 100.0
     }
 
     val x = HEIGHT / 2
@@ -44,6 +45,16 @@ class Scene(private var objects: List<Cuboid>) {
 
     fun rotateZRight() {
         val cuboids = multiplyObjects(Matrix.zRotation(Scene.ANGULAR_STEP))
+        this.objects = cuboids
+    }
+
+    fun moveLeft() {
+        val cuboids = multiplyObjects(Matrix.moveLeft(Scene.LINEAR_STEP))
+        this.objects = cuboids
+    }
+
+    fun moveRight() {
+        val cuboids = multiplyObjects(Matrix.moveRight(Scene.LINEAR_STEP))
         this.objects = cuboids
     }
 
