@@ -19,23 +19,13 @@ class Scene(private var objects: List<Cuboid>) {
 
     fun rotateZLeft(camera: Camera) {
         var r = Matrix.identity().multiple(Matrix.zRotation(-Scene.ANGULAR_STEP))
-        var t = Matrix.identity().multiple(r)
-        val v = arrayOf(0.0, 0.0, 0.0)
-        for (w in 0..2)
-            t.setAt(w, 3, v[w])
-
-        val cuboids = multiplyObjects(t)
+        val cuboids = multiplyObjects(r)
         this.objects = cuboids
     }
 
     fun rotateZRight(camera: Camera) {
         var r = Matrix.identity().multiple(Matrix.zRotation(Scene.ANGULAR_STEP))
-        var t = Matrix.identity().multiple(r)
-        val v = arrayOf(0.0, 0.0, 0.0)
-        for (w in 0..2)
-            t.setAt(w, 3, v[w])
-
-        val cuboids = multiplyObjects(t)
+        val cuboids = multiplyObjects(r)
         this.objects = cuboids
     }
 
@@ -47,23 +37,13 @@ class Scene(private var objects: List<Cuboid>) {
 
     fun rotateYRight(camera: Camera) {
         var r = Matrix.identity().multiple(Matrix.yRotation(Scene.ANGULAR_STEP))
-        var t = Matrix.identity().multiple(r)
-        val v = arrayOf(0.0, 0.0, 0.0)
-        for (w in 0..2)
-            t.setAt(w, 3, v[w])
-
-        val cuboids = multiplyObjects(t)
+        val cuboids = multiplyObjects(r)
         this.objects = cuboids
     }
 
     fun rotateYLeft(camera: Camera) {
         var r = Matrix.identity().multiple(Matrix.yRotation(-Scene.ANGULAR_STEP))
-        var t = Matrix.identity().multiple(r)
-        val v = arrayOf(0.0, 0.0, 0.0)
-        for (w in 0..2)
-            t.setAt(w, 3, v[w])
-
-        val cuboids = multiplyObjects(t)
+        val cuboids = multiplyObjects(r)
         this.objects = cuboids
     }
 }
