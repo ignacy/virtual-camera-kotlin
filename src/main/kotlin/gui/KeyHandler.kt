@@ -16,6 +16,8 @@ class KeyHandler(var session: Session) : KeyListener {
                 'x' -> session.rotateZRight()
                 'c' -> session.rotateYLeft()
                 'v' -> session.rotateYRight()
+                'b' -> session.rotateXLeft()
+                'n' -> session.rotateXRight()
             }
             session.repaint()
         }

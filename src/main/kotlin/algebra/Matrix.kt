@@ -13,15 +13,13 @@ class Matrix(private val m: Array<Array<Double>>) {
             return Matrix(arrayOf(values.toTypedArray()))
         }
 
-        fun identity() : Matrix {
-            return Matrix(
-                    arrayOf(
-                        arrayOf(1.0, 0.0, 0.0, 0.0),
-                        arrayOf(0.0, 1.0, 0.0, 0.0),
-                        arrayOf(0.0, 0.0, 1.0, 0.0),
-                        arrayOf(0.0, 0.0, 0.0, 1.0)
-                    )
-            )
+        fun xRotation(fi: Double): Matrix {
+            return Matrix(arrayOf(
+                    arrayOf(1.0, 0.0, 0.0, 0.0),
+                    arrayOf(0.0, cos(fi), -sin(fi), 0.0),
+                    arrayOf(0.0, sin(fi), cos(fi), 0.0),
+                    arrayOf(0.0, 0.0, 0.0, 1.0)
+            ))
         }
 
         fun yRotation(fi: Double): Matrix {

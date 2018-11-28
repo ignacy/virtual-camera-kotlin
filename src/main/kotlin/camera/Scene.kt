@@ -17,6 +17,16 @@ class Scene(private var objects: List<Cuboid>) {
         objects.map { it.draw(context) }
     }
 
+    fun rotateXLeft() {
+        val cuboids = multiplyObjects(Matrix.xRotation(-Scene.ANGULAR_STEP))
+        this.objects = cuboids
+    }
+
+    fun rotateXRight() {
+        val cuboids = multiplyObjects(Matrix.xRotation(Scene.ANGULAR_STEP))
+        this.objects = cuboids
+    }
+
     fun rotateYRight() {
         val cuboids = multiplyObjects(Matrix.yRotation(Scene.ANGULAR_STEP))
         this.objects = cuboids
@@ -36,7 +46,7 @@ class Scene(private var objects: List<Cuboid>) {
         val cuboids = multiplyObjects(Matrix.zRotation(Scene.ANGULAR_STEP))
         this.objects = cuboids
     }
-    
+
     fun multiplyObjects(translation : Matrix) : List<Cuboid> {
         return objects.map {
             it.multiplyLines(translation)
