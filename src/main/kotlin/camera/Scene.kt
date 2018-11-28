@@ -74,4 +74,12 @@ class Scene(private var objects: List<Cuboid>) {
         }
     }
 
+    fun zoomOut() {
+
+    }
+
+    fun zoomIn() {
+
+    }
+
 }

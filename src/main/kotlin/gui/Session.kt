@@ -49,4 +49,12 @@ class Session(var camera : Camera, var scene : Scene, var canvas : Canvas) {
         this.scene.moveDown()
     }
 
+    fun zoomIn() {
+        this.scene.zoomIn()
+    }
+
+    fun zoomOut() {
+        this.scene.zoomOut()
+    }
+
 }
