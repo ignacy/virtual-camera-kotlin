@@ -1,5 +1,8 @@
 package algebra
 
+import kotlin.math.cos
+import kotlin.math.sin
+
 class Matrix(private val m: Array<Array<Double>>) {
     companion object {
         fun zeros(rows : Int, cols : Int) : Matrix {
@@ -22,27 +25,21 @@ class Matrix(private val m: Array<Array<Double>>) {
         }
 
        fun makeRotationZMatrix(fi: Double, sceneY : Double): Matrix {
-            val m = this.identity()
-            val cos = java.lang.Math.cos(fi)
-            val sin = java.lang.Math.sin(fi)
-            m.setAt(0, 0, cos)
-            m.setAt(1, 1, cos)
-            m.setAt(1, 0, sin)
-            m.setAt(0, 1, -sin)
-            m.setAt(0, 3, (-1).toDouble() * sin * sceneY)
-            m.setAt(1, 3, (cos - 1) * sceneY)
-            return m
+            return Matrix(arrayOf(
+                    arrayOf(cos(fi), -sin(fi), 0.0, 0.0),
+                    arrayOf(sin(fi), cos(fi), 0.0, 0.0),
+                    arrayOf(0.0, 0.0, 1.0, 0.0),
+                    arrayOf(0.0, 0.0, 0.0, 1.0)
+            ))
         }
 
         fun makeRotationYMatrix(fi: Double, sceneY: Double): Matrix {
-            val m = this.identity()
-            val cos = java.lang.Math.cos(fi)
-            val sin = java.lang.Math.sin(fi)
-            m.setAt(0, 0, cos);
-            m.setAt(2, 2, cos);
-            m.setAt(0, 2, sin);
-            m.setAt(2, 0, -sin);
-            return m;
+            return Matrix(arrayOf(
+                    arrayOf(cos(fi), 0.0, sin(fi), 0.0),
+                    arrayOf(0.0, 1.0, 0.0, 0.0),
+                    arrayOf(-sin(fi), 0.0, cos(fi), 0.0),
+                    arrayOf(0.0, 0.0, 0.0, 1.0)
+            ))
         }
     }
 
