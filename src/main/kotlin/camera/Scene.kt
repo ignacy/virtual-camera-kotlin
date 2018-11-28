@@ -5,8 +5,9 @@ import gui.DrawingContext
 
 class Scene(private var objects: List<Cuboid>) {
     companion object {
-        val HEIGHT = 800
-        val WIDTH = 800
+        const val HEIGHT = 800
+        const val WIDTH = 800
+        const val ANGULAR_STEP = 0.1
     }
 
     val x = HEIGHT / 2
@@ -17,7 +18,7 @@ class Scene(private var objects: List<Cuboid>) {
     }
 
     fun rotateZLeft(camera: Camera) {
-        var r = Matrix.identity().multiple(Matrix.makeRotationZMatrix(-0.1, camera.y))
+        var r = Matrix.identity().multiple(Matrix.zRotation(-Scene.ANGULAR_STEP))
         var t = Matrix.identity().multiple(r)
         val v = arrayOf(0.0, 0.0, 0.0)
         for (w in 0..2)
@@ -28,7 +29,7 @@ class Scene(private var objects: List<Cuboid>) {
     }
 
     fun rotateZRight(camera: Camera) {
-        var r = Matrix.identity().multiple(Matrix.makeRotationZMatrix(0.1, camera.y))
+        var r = Matrix.identity().multiple(Matrix.zRotation(Scene.ANGULAR_STEP))
         var t = Matrix.identity().multiple(r)
         val v = arrayOf(0.0, 0.0, 0.0)
         for (w in 0..2)
@@ -45,7 +46,7 @@ class Scene(private var objects: List<Cuboid>) {
     }
 
     fun rotateYRight(camera: Camera) {
-        var r = Matrix.identity().multiple(Matrix.makeRotationYMatrix(0.1, camera.y))
+        var r = Matrix.identity().multiple(Matrix.yRotation(Scene.ANGULAR_STEP))
         var t = Matrix.identity().multiple(r)
         val v = arrayOf(0.0, 0.0, 0.0)
         for (w in 0..2)
@@ -56,7 +57,7 @@ class Scene(private var objects: List<Cuboid>) {
     }
 
     fun rotateYLeft(camera: Camera) {
-        var r = Matrix.identity().multiple(Matrix.makeRotationYMatrix(-0.1, camera.y))
+        var r = Matrix.identity().multiple(Matrix.yRotation(-Scene.ANGULAR_STEP))
         var t = Matrix.identity().multiple(r)
         val v = arrayOf(0.0, 0.0, 0.0)
         for (w in 0..2)

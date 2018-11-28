@@ -24,20 +24,20 @@ class Matrix(private val m: Array<Array<Double>>) {
             )
         }
 
-       fun makeRotationZMatrix(fi: Double, sceneY : Double): Matrix {
-            return Matrix(arrayOf(
-                    arrayOf(cos(fi), -sin(fi), 0.0, 0.0),
-                    arrayOf(sin(fi), cos(fi), 0.0, 0.0),
-                    arrayOf(0.0, 0.0, 1.0, 0.0),
-                    arrayOf(0.0, 0.0, 0.0, 1.0)
-            ))
-        }
-
-        fun makeRotationYMatrix(fi: Double, sceneY: Double): Matrix {
+        fun yRotation(fi: Double): Matrix {
             return Matrix(arrayOf(
                     arrayOf(cos(fi), 0.0, sin(fi), 0.0),
                     arrayOf(0.0, 1.0, 0.0, 0.0),
                     arrayOf(-sin(fi), 0.0, cos(fi), 0.0),
+                    arrayOf(0.0, 0.0, 0.0, 1.0)
+            ))
+        }
+
+       fun zRotation(fi: Double): Matrix {
+            return Matrix(arrayOf(
+                    arrayOf(cos(fi), -sin(fi), 0.0, 0.0),
+                    arrayOf(sin(fi), cos(fi), 0.0, 0.0),
+                    arrayOf(0.0, 0.0, 1.0, 0.0),
                     arrayOf(0.0, 0.0, 0.0, 1.0)
             ))
         }
