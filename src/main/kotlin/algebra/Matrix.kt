@@ -52,18 +52,16 @@ class Matrix(private val m: Array<Array<Double>>) {
 
     fun at(row: Int, col: Int) = m!![row][col]
 
-    fun multiple(p: Matrix) : Matrix {
-        val x = Matrix.zeros(4, 4)
+    fun multiple(b: Matrix) : Matrix {
+        val result = Matrix.zeros(4, 4)
 
         for (i in 0 until this.rows()) {
-            for (j in 0 until p.cols()) {
+            for (j in 0 until b.cols()) {
                 for (k in 0 until this.cols()) {
-                    x.setAt(i, j, x.at(i, j) + this.at(i, k) * p.at(k, j))
+                    result.setAt(i, j, result.at(i, j) + this.at(i, k) * b.at(k, j))
                 }
             }
         }
-        return x
+        return result
     }
-
-
 }

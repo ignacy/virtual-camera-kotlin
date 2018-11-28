@@ -14,20 +14,12 @@ class Point3D(val x: Double, val y: Double, val z: Double) {
     }
 
     fun multiply(translation: Matrix): Point3D {
-        val v = arrayOf(x, y, z, 1.0)
-        val tmp = Array(4) { 0.0 }
-
-        for (w in 0..3) {
-            tmp[w] = 0.0
-            for (k in 0..3) {
-                tmp[w] += translation.at(w, k) * v[k]
-            }
-        }
-
+        val result = Matrix(arrayOf(arrayOf(x, y, z, 1.0))).multiple(translation)
+        // TODO: replace with result.normalize()
         return Point3D(
-                tmp[0] * (1/tmp[3]),
-                tmp[1] * (1/tmp[3]),
-                tmp[2] * (1/tmp[3])
+                result.at(0, 0) / result.at(0,3),
+                result.at(0, 1) / result.at(0,3),
+                result.at(0, 2) / result.at(0, 3)
         )
     }
 }
