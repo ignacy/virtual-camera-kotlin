@@ -10,19 +10,19 @@ class Session(var camera : Camera, var scene : Scene, var canvas : Canvas) {
     }
 
     fun rotateZLeft() {
-        this.scene.rotateZLeft(this.camera)
+        this.scene.rotateZLeft()
     }
 
     fun rotateZRight() {
-        this.scene.rotateZRight(this.camera)
+        this.scene.rotateZRight()
     }
 
     fun rotateYLeft() {
-        this.scene.rotateYLeft(this.camera)
+        this.scene.rotateYLeft()
     }
 
     fun rotateYRight() {
-        this.scene.rotateYRight(this.camera)
+        this.scene.rotateYRight()
     }
 
 }
