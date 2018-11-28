@@ -68,4 +68,20 @@ class Matrix(private val m: Array<Array<Double>>) {
         }
         return result
     }
+
+    fun normalized() : Matrix {
+        var result = Matrix.zeros(this.rows(), this.cols())
+
+        for (i in 0 until this.rows()) {
+            for (j in 0 until this.cols()) {
+                result.setAt(i, j, this.at(i, j) / this.at(i, this.cols() - 1))
+            }
+        }
+
+        for (i in 0 until this.rows()) {
+            result.setAt(i, this.cols() - 1, 0.0)
+        }
+
+        return result
+    }
 }
