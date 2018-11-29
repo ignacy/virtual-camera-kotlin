@@ -50,11 +50,19 @@ class Session(var camera : Camera, var scene : Scene, var canvas : Canvas) {
     }
 
     fun zoomIn() {
-        this.scene.zoomIn()
+        this.camera.planeDistance = this.camera.planeDistance + Scene.ZOOM_STEP
     }
 
     fun zoomOut() {
-        this.scene.zoomOut()
+        this.camera.planeDistance = this.camera.planeDistance - Scene.ZOOM_STEP
+    }
+
+    fun moveCloser() {
+        this.scene.moveCloser()
+    }
+
+    fun moveFurther() {
+        this.scene.moveFurther()
     }
 
 }

@@ -47,7 +47,7 @@ class Matrix(private val m: Array<Array<Double>>) {
 
         fun moveLeft(step: Double): Matrix {
             return Matrix(arrayOf(
-                    arrayOf(1.0, 0.0, 0.0, -step),
+                    arrayOf(1.0, 0.0, 0.0, step),
                     arrayOf(0.0, 1.0, 0.0, 1.0),
                     arrayOf(0.0, 0.0, 1.0, 1.0),
                     arrayOf(0.0, 0.0, 0.0, 1.0)
@@ -56,7 +56,7 @@ class Matrix(private val m: Array<Array<Double>>) {
 
         fun moveRight(step: Double): Matrix {
             return Matrix(arrayOf(
-                    arrayOf(1.0, 0.0, 0.0, step),
+                    arrayOf(1.0, 0.0, 0.0, -step),
                     arrayOf(0.0, 1.0, 0.0, 0.0),
                     arrayOf(0.0, 0.0, 1.0, 0.0),
                     arrayOf(0.0, 0.0, 0.0, 1.0)
@@ -67,7 +67,7 @@ class Matrix(private val m: Array<Array<Double>>) {
             return Matrix(arrayOf(
                     arrayOf(1.0, 0.0, 0.0, 0.0),
                     arrayOf(0.0, 1.0, 0.0, 0.0),
-                    arrayOf(0.0, 0.0, 1.0, step),
+                    arrayOf(0.0, 0.0, 1.0, -step),
                     arrayOf(0.0, 0.0, 0.0, 1.0)
             ))
         }
@@ -76,7 +76,25 @@ class Matrix(private val m: Array<Array<Double>>) {
             return Matrix(arrayOf(
                     arrayOf(1.0, 0.0, 0.0, 0.0),
                     arrayOf(0.0, 1.0, 0.0, 0.0),
-                    arrayOf(0.0, 0.0, 1.0, -step),
+                    arrayOf(0.0, 0.0, 1.0, step),
+                    arrayOf(0.0, 0.0, 0.0, 1.0)
+            ))
+        }
+
+        fun moveCloser(step: Double): Matrix {
+            return Matrix(arrayOf(
+                    arrayOf(1.0, 0.0, 0.0, 0.0),
+                    arrayOf(0.0, 1.0, 0.0, -step),
+                    arrayOf(0.0, 0.0, 1.0, 0.0),
+                    arrayOf(0.0, 0.0, 0.0, 1.0)
+            ))
+        }
+
+        fun moveFurther(step: Double): Matrix {
+            return Matrix(arrayOf(
+                    arrayOf(1.0, 0.0, 0.0, 0.0),
+                    arrayOf(0.0, 1.0, 0.0, step),
+                    arrayOf(0.0, 0.0, 1.0, 0.0),
                     arrayOf(0.0, 0.0, 0.0, 1.0)
             ))
         }

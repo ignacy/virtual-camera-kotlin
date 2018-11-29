@@ -8,6 +8,7 @@ class Scene(private var objects: List<Cuboid>) {
         const val HEIGHT = 800
         const val WIDTH = 800
         const val ANGULAR_STEP = 0.1
+        const val ZOOM_STEP = 50.0
         const val LINEAR_STEP = 100.0
     }
 
@@ -74,12 +75,14 @@ class Scene(private var objects: List<Cuboid>) {
         }
     }
 
-    fun zoomOut() {
-
+    fun moveCloser() {
+        val cuboids = multiplyObjects(Matrix.moveCloser(Scene.LINEAR_STEP))
+        this.objects = cuboids
     }
 
-    fun zoomIn() {
-
+    fun moveFurther() {
+        val cuboids = multiplyObjects(Matrix.moveFurther(Scene.LINEAR_STEP))
+        this.objects = cuboids
     }
 
 }

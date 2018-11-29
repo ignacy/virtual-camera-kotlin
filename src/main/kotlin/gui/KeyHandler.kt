@@ -25,11 +25,12 @@ class KeyHandler(var session: Session) : KeyListener {
                 KeyEvent.VK_RIGHT -> session.moveRight()
                 KeyEvent.VK_UP -> session.moveUp()
                 KeyEvent.VK_DOWN -> session.moveDown()
+
                 // WSAD
                 KeyEvent.VK_A -> session.moveLeft()
                 KeyEvent.VK_D -> session.moveRight()
-                KeyEvent.VK_W -> session.moveUp()
-                KeyEvent.VK_S -> session.moveDown()
+                KeyEvent.VK_W -> session.moveCloser()
+                KeyEvent.VK_S -> session.moveFurther()
 
                 //Zoom
                 KeyEvent.VK_Q -> session.zoomIn()
