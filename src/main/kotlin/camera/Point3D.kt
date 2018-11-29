@@ -3,6 +3,7 @@ package camera
 import algebra.Matrix
 import gui.DrawingContext
 
+
 class Point3D(val x: Double, val y: Double, val z: Double) {
     companion object {
         fun fromVector(vector : Matrix) : Point3D {
@@ -22,7 +23,18 @@ class Point3D(val x: Double, val y: Double, val z: Double) {
     }
 
     fun multiply(translation: Matrix): Point3D {
-        val result = this.toVector().multiple(translation).normalized()
-        return Point3D.fromVector(result)
+        val result = Array(4 ) { 0.0 }
+
+        for (w in 0..3) {
+            result[w] = 0.0
+            for (k in 0..3) {
+                result[w] += translation.at(w, k) *
+                        this.toVector().at(k, 0)
+            }
+        }
+
+
+        val finalResult = Matrix(arrayOf(result)).normalized()
+        return Point3D.fromVector(finalResult)
     }
 }

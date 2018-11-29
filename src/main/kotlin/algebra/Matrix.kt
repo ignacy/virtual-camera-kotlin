@@ -1,16 +1,21 @@
 package algebra
 
+import java.util.*
 import kotlin.math.cos
 import kotlin.math.sin
 
 class Matrix(private val m: Array<Array<Double>>) {
+    override fun toString(): String {
+        return Arrays.deepToString(m)
+    }
+
     companion object {
         fun zeros(rows : Int, cols : Int) : Matrix {
             return Matrix(Array(rows) { Array(cols) { 0.0 } })
         }
 
         fun vector(vararg values : Double) : Matrix {
-            return Matrix(arrayOf(values.toTypedArray()))
+            return Matrix(values.map { arrayOf(it) }.toTypedArray())
         }
 
         fun xRotation(fi: Double): Matrix {
@@ -43,8 +48,8 @@ class Matrix(private val m: Array<Array<Double>>) {
         fun moveLeft(step: Double): Matrix {
             return Matrix(arrayOf(
                     arrayOf(1.0, 0.0, 0.0, -step),
-                    arrayOf(0.0, 1.0, 0.0, 0.0),
-                    arrayOf(0.0, 0.0, 1.0, 0.0),
+                    arrayOf(0.0, 1.0, 0.0, 1.0),
+                    arrayOf(0.0, 0.0, 1.0, 1.0),
                     arrayOf(0.0, 0.0, 0.0, 1.0)
             ))
         }
@@ -88,6 +93,7 @@ class Matrix(private val m: Array<Array<Double>>) {
     fun at(row: Int, col: Int) = m!![row][col]
 
     fun multiple(b: Matrix) : Matrix {
+        assert(this.cols() == b.rows())
         val result = Matrix.zeros(this.rows(), b.cols())
 
         for (i in 0 until this.rows()) {
