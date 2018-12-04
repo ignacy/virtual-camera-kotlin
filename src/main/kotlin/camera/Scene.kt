@@ -3,6 +3,8 @@ package camera
 import algebra.Matrix
 import gui.DrawingContext
 
+data class Camera(var planeDistance: Double, val y: Double)
+
 class Scene(private var objects: List<Cuboid>) {
     companion object {
         const val HEIGHT = 800
