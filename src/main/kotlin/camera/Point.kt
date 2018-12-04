@@ -3,6 +3,8 @@ package camera
 import algebra.Matrix
 import gui.DrawingContext
 
+
+data class Point2D(val x: Double, val y: Double)
 data class Point3D(val x: Double, val y: Double, val z: Double)
 
 fun fromVector(vector : Matrix) : Point3D = Point3D(vector.at(0, 0), vector.at(0, 1), vector.at(0, 2))
