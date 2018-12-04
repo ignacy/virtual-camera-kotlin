@@ -1,3 +1,3 @@
 package camera
 
-class Point2D(val x: Double, val y: Double)
+data class Point2D(val x: Double, val y: Double)
