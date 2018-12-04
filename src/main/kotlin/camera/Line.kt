@@ -7,7 +7,7 @@ import java.awt.Graphics
 
 class Line3D(val start: Point3D, val end: Point3D)
 
-fun multiplyPoints(line: Line3D, translation: Matrix): Line3D = Line3D(multiply(line.start, translation), multiply(line.end, translation))
+fun multiplyLine(line: Line3D, translation: Matrix): Line3D = Line3D(multiply(line.start, translation), multiply(line.end, translation))
 fun drawLine(g: Graphics, p1 : Point2D, p2 : Point2D) = g.drawLine(p1.x.toInt(), p1.y.toInt(), p2.x.toInt(), p2.y.toInt())
 fun draw(line: Line3D, c: DrawingContext, color: Color) {
     c.graphics.color = color
