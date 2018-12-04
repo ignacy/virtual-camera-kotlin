@@ -32,14 +32,6 @@ class Cuboid {
         )
     }
 
-    fun draw(context: DrawingContext) {
-        this.lines.map { it.draw(context, this.color) }
-    }
-
-    fun multiplyLines(translation: Matrix): Cuboid {
-        return Cuboid(
-                this.lines.map { it.multiplyPoints(translation) },
-                this.color
-        )
-    }
+    fun draw(context: DrawingContext) = this.lines.map { draw(it, context, this.color) }
+    fun multiplyLines(translation: Matrix): Cuboid = Cuboid(this.lines.map { multiplyPoints(it, translation) }, this.color)
 }

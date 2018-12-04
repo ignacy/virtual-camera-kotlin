@@ -20,68 +20,64 @@ class Scene(private var objects: List<Cuboid>) {
     }
 
     fun rotateXLeft() {
-        val cuboids = multiplyObjects(Matrix.xRotation(-Scene.ANGULAR_STEP))
+        val cuboids = multiplyObjects(algebra.xRotation(-Scene.ANGULAR_STEP))
         this.objects = cuboids
     }
 
     fun rotateXRight() {
-        val cuboids = multiplyObjects(Matrix.xRotation(Scene.ANGULAR_STEP))
+        val cuboids = multiplyObjects(algebra.xRotation(Scene.ANGULAR_STEP))
         this.objects = cuboids
     }
 
     fun rotateYRight() {
-        val cuboids = multiplyObjects(Matrix.yRotation(Scene.ANGULAR_STEP))
+        val cuboids = multiplyObjects(algebra.yRotation(Scene.ANGULAR_STEP))
         this.objects = cuboids
     }
 
     fun rotateYLeft() {
-        val cuboids = multiplyObjects(Matrix.yRotation(-Scene.ANGULAR_STEP))
+        val cuboids = multiplyObjects(algebra.yRotation(-Scene.ANGULAR_STEP))
         this.objects = cuboids
     }
 
     fun rotateZLeft() {
-        val cuboids = multiplyObjects(Matrix.zRotation(-Scene.ANGULAR_STEP))
+        val cuboids = multiplyObjects(algebra.zRotation(-Scene.ANGULAR_STEP))
         this.objects = cuboids
     }
 
     fun rotateZRight() {
-        val cuboids = multiplyObjects(Matrix.zRotation(Scene.ANGULAR_STEP))
+        val cuboids = multiplyObjects(algebra.zRotation(Scene.ANGULAR_STEP))
         this.objects = cuboids
     }
 
     fun moveLeft() {
-        val cuboids = multiplyObjects(Matrix.moveLeft(Scene.LINEAR_STEP))
+        val cuboids = multiplyObjects(algebra.moveLeft(Scene.LINEAR_STEP))
         this.objects = cuboids
     }
 
     fun moveRight() {
-        val cuboids = multiplyObjects(Matrix.moveRight(Scene.LINEAR_STEP))
+        val cuboids = multiplyObjects(algebra.moveRight(Scene.LINEAR_STEP))
         this.objects = cuboids
     }
 
     fun moveUp() {
-        val cuboids = multiplyObjects(Matrix.moveUp(Scene.LINEAR_STEP))
+        val cuboids = multiplyObjects(algebra.moveUp(Scene.LINEAR_STEP))
         this.objects = cuboids
     }
 
     fun moveDown() {
-        val cuboids = multiplyObjects(Matrix.moveDown(Scene.LINEAR_STEP))
+        val cuboids = multiplyObjects(algebra.moveDown(Scene.LINEAR_STEP))
         this.objects = cuboids
     }
 
-    fun multiplyObjects(translation : Matrix) : List<Cuboid> {
-        return objects.map {
-            it.multiplyLines(translation)
-        }
-    }
+    fun multiplyObjects(translation : Matrix) : List<Cuboid> = objects.map { it.multiplyLines(translation) }
 
     fun moveCloser() {
-        val cuboids = multiplyObjects(Matrix.moveCloser(Scene.LINEAR_STEP))
+        val cuboids = multiplyObjects(algebra.moveCloser(Scene.LINEAR_STEP))
         this.objects = cuboids
     }
 
     fun moveFurther() {
-        val cuboids = multiplyObjects(Matrix.moveFurther(Scene.LINEAR_STEP))
+        val cuboids = multiplyObjects(algebra.moveFurther(Scene.LINEAR_STEP))
         this.objects = cuboids
     }
 
