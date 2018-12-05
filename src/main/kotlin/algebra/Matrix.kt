@@ -64,23 +64,22 @@ fun moveFurther(step: Double): Matrix = Matrix(arrayOf(
 class Matrix(private val m: Array<Array<Double>>) {
     override fun toString(): String = Arrays.deepToString(m)
 
+    val rows get() = m.size
+    val cols get() = m[0].size
+
     fun setAt(w: Int, k: Int, d: Double) {
         m!![w][k] = d
     }
 
-    fun rows() = m.size
-
-    fun cols() = m[0].size
-
     fun at(row: Int, col: Int) = m!![row][col]
 
     fun multiple(b: Matrix) : Matrix {
-        assert(this.cols() == b.rows())
-        val result = zerosMatrix(this.rows(), b.cols())
+        assert(this.cols == b.rows)
+        val result = zerosMatrix(this.rows, b.cols)
 
-        for (i in 0 until this.rows()) {
-            for (j in 0 until b.cols()) {
-                for (k in 0 until this.cols()) {
+        for (i in 0 until this.rows) {
+            for (j in 0 until b.cols) {
+                for (k in 0 until this.cols) {
                     result.setAt(i, j, result.at(i, j) + this.at(i, k) * b.at(k, j))
                 }
             }
@@ -89,16 +88,16 @@ class Matrix(private val m: Array<Array<Double>>) {
     }
 
     fun normalized() : Matrix {
-        var result = zerosMatrix(this.rows(), this.cols())
+        var result = zerosMatrix(this.rows, this.cols)
 
-        for (i in 0 until this.rows()) {
-            for (j in 0 until this.cols()) {
-                result.setAt(i, j, this.at(i, j) / this.at(i, this.cols() - 1))
+        for (i in 0 until this.rows) {
+            for (j in 0 until this.cols) {
+                result.setAt(i, j, this.at(i, j) / this.at(i, this.cols - 1))
             }
         }
 
-        for (i in 0 until this.rows()) {
-            result.setAt(i, this.cols() - 1, 0.0)
+        for (i in 0 until this.rows) {
+            result.setAt(i, this.cols - 1, 0.0)
         }
 
         return result
