@@ -15,20 +15,6 @@ class Matrix(private val m: Array<Array<Double>>) {
         m[row][col] = value
     }
 
-    fun multiple(b: Matrix) : Matrix {
-        assert(this.cols == b.rows)
-        val result = zerosMatrix(this.rows, b.cols)
-
-        for (i in 0 until this.rows) {
-            for (j in 0 until b.cols) {
-                for (k in 0 until this.cols) {
-                    result[i, j] += this[i, k] * b[k, j]
-                }
-            }
-        }
-        return result
-    }
-
     fun normalized() : Matrix {
         var result = zerosMatrix(this.rows, this.cols)
 
