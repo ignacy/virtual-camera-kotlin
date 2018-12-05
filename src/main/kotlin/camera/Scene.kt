@@ -71,7 +71,7 @@ class Scene(private var objects: List<Cuboid>) {
         this.objects = cuboids
     }
 
-    fun multiplyObjects(translation : Matrix) : List<Cuboid> = objects.map { it.multiplyLines(translation) }
+    fun multiplyObjects(translation : Matrix) : List<Cuboid> = objects.map { it.multiplySides(translation) }
 
     fun moveCloser() {
         val cuboids = multiplyObjects(algebra.moveCloser(Scene.LINEAR_STEP))

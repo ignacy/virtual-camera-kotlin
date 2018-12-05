@@ -6,25 +6,13 @@ import java.awt.Color
 
 typealias Walls = Map<String, List<Point>>
 
-fun Walls.getLines() : List<Line3D> {
-    return this.values.flatMap {
-        listOf(
-                Line3D(it[0], it[1]),
-                Line3D(it[1], it[2]),
-                Line3D(it[2], it[3]),
-                Line3D(it[3], it[0])
-        )
-    }
-}
-
 class Cuboid {
-    var lines : List<Line3D> = emptyList()
     var color : Color = Color.decode("#000000")
-    lateinit var walls : Walls
+    var walls : Walls
 
-    constructor(l : List<Line3D>, c : Color) {
-        lines = l
+    constructor(w : Walls, c : Color) {
         color = c
+        walls = w
     }
 
     constructor(point : Point, l : Int, c : Color) {
@@ -38,10 +26,15 @@ class Cuboid {
                 "left" to listOf(point, Point(x, y+l, z), Point(x, y +l, z + l), Point(x, y, z+l)),
                 "right" to listOf(Point(x+l, y, z), Point(x+l, y, z +l), Point(x+l, y+l, z+l), Point(x+l, y+l, z))
         )
-
-        lines = walls.getLines()
     }
 
-    fun draw(context: DrawingContext) = this.lines.map { draw(it, context, this.color) }
-    fun multiplyLines(translation: Matrix): Cuboid = Cuboid(this.lines.map { transformLine(it, translation) }, this.color)
+    fun draw(context: DrawingContext) = this.walls.values.map { drawSide(it, context, this.color) }
+    fun multiplySides(translation: Matrix): Cuboid {
+        val newWalls = HashMap<String, List<Point3D>>()
+
+        this.walls.map { (name, points) ->
+            newWalls.put(name, points.map { transformPoint(it, translation) })
+        }
+        return Cuboid(newWalls, this.color)
+    }
 }

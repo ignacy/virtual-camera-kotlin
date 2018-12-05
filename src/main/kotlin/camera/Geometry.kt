@@ -6,7 +6,6 @@ import java.awt.Color
 
 data class Point2D(val x: Double, val y: Double)
 data class Point3D(val x: Double, val y: Double, val z: Double)
-data class Line3D(val start: Point3D, val end: Point3D)
 
 typealias Point = Point3D
 
@@ -22,18 +21,15 @@ fun projectTo2D(p : Point3D, context: DrawingContext) : Point2D {
     }
 }
 
-fun transformLine(line: Line3D, translation: Matrix): Line3D {
-    fun multiply(p: Point3D): Point3D {
-        val result = Array(4) { 0.0 }
-        for (w in 0..3) {
-            result[w] = 0.0
-            for (k in 0..3) {
-                result[w] += translation[w, k] * pointToVectorMatrix(p)[k, 0]
-            }
+fun transformPoint(p : Point3D, translation: Matrix) : Point3D {
+    val result = Array(4) { 0.0 }
+    for (w in 0..3) {
+        result[w] = 0.0
+        for (k in 0..3) {
+            result[w] += translation[w, k] * pointToVectorMatrix(p)[k, 0]
         }
-        return pointFromVectorMatrix(v = Matrix(arrayOf(result)).normalized())
     }
-    return Line3D(multiply(line.start), multiply(line.end))
+    return pointFromVectorMatrix(Matrix(arrayOf(result)).normalized())
 }
 
 fun transformAndCut(
@@ -57,7 +53,19 @@ fun transformAndCut(
     }
 }
 
-fun draw(line: Line3D, c: DrawingContext, color: Color) {
+fun drawSide(points : List<Point3D>, c: DrawingContext, color: Color) {
+    c.graphics.color = color
+
+
+    val projectedPoints = points.map { projectTo2D(it, c) }
+    val xs = projectedPoints.map { it.x.toInt() }.toIntArray()
+    val ys = projectedPoints.map { it.y.toInt() }.toIntArray()
+    c.graphics.drawPolygon(xs, ys, projectedPoints.size)
+    c.graphics.color = Color.decode("#dae1e7")
+    c.graphics.fillPolygon(xs, ys, projectedPoints.size)
+}
+
+/*fun drawLine(line: Any, c: DrawingContext, color: Color) {
     fun isVisible(p: Point3D): Boolean = p.y >= (c.camera.y + c.camera.planeDistance)
 
     c.graphics.color = color
@@ -72,4 +80,4 @@ fun draw(line: Line3D, c: DrawingContext, color: Color) {
     if (p1 != null && p2 != null) {
         c.graphics.drawLine(p1.x.toInt(), p1.y.toInt(), p2.x.toInt(), p2.y.toInt())
     }
-}
+}*/
