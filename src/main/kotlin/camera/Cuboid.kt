@@ -4,10 +4,12 @@ import algebra.Matrix
 import gui.DrawingContext
 import java.awt.Color
 
+typealias Walls = Map<String, List<Point>>
+
 class Cuboid {
     var lines : List<Line3D> = emptyList()
     var color : Color = Color.decode("#000000")
-    lateinit var walls : Map<String, List<Point3D>>
+    lateinit var walls : Walls
 
     constructor(l : List<Line3D>, c : Color) {
         lines = l
