@@ -11,7 +11,6 @@ data class Line3D(val start: Point3D, val end: Point3D)
 fun pointFromVectorMatrix(v : Matrix) : Point3D = Point3D(v.at(0, 0), v.at(0, 1), v.at(0, 2))
 fun pointToVectorMatrix(p : Point3D) : Matrix = algebra.vector(p.x, p.y, p.z, 1.0)
 
-fun isOnViewPlane(p: Point3D, c: DrawingContext): Boolean = p.y == c.scene.x + c.camera.planeDistance
 fun projectTo2D(p : Point3D, context: DrawingContext) : Point2D {
     with (context) {
         val k = camera.planeDistance / (p.y - camera.y)
@@ -20,7 +19,8 @@ fun projectTo2D(p : Point3D, context: DrawingContext) : Point2D {
         return Point2D(newX, newZ)
     }
 }
-fun multiplyLine(line: Line3D, translation: Matrix): Line3D {
+
+fun transformLine(line: Line3D, translation: Matrix): Line3D {
     fun multiply(p: Point3D): Point3D {
         val result = Array(4) { 0.0 }
         for (w in 0..3) {
@@ -55,7 +55,9 @@ fun transformAndCut(
         b: Point3D,
         c: DrawingContext
 ): Pair<Point2D, Point2D> {
-    return if (isOnViewPlane(a, c)) {
+    fun isOnViewPlane(p: Point3D): Boolean = p.y == c.scene.x + c.camera.planeDistance
+
+    return if (isOnViewPlane(a)) {
         val nowy1 = Point2D(
                 a.x + c.scene.x,
                 c.scene.z - a.z
