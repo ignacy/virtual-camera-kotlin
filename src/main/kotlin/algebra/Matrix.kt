@@ -67,11 +67,12 @@ class Matrix(private val m: Array<Array<Double>>) {
     val rows get() = m.size
     val cols get() = m[0].size
 
-    fun setAt(w: Int, k: Int, d: Double) {
-        m!![w][k] = d
+    private fun setAt(row: Int, col: Int, value: Double) {
+        m[row][col] = value
     }
 
     operator fun get(row: Int, col: Int) = m[row][col]
+    operator fun set(row: Int, col: Int, value: Double) = this.setAt(row, col, value)
 
     fun multiple(b: Matrix) : Matrix {
         assert(this.cols == b.rows)
@@ -80,7 +81,7 @@ class Matrix(private val m: Array<Array<Double>>) {
         for (i in 0 until this.rows) {
             for (j in 0 until b.cols) {
                 for (k in 0 until this.cols) {
-                    result.setAt(i, j, result[i, j] + this[i, k] * b[k, j])
+                    result[i, j] += this[i, k] * b[k, j]
                 }
             }
         }
@@ -92,12 +93,12 @@ class Matrix(private val m: Array<Array<Double>>) {
 
         for (i in 0 until this.rows) {
             for (j in 0 until this.cols) {
-                result.setAt(i, j, this[i, j] / this[i, this.cols - 1])
+                result[i, j] = this[i, j] / this[i, this.cols - 1]
             }
         }
 
         for (i in 0 until this.rows) {
-            result.setAt(i, this.cols - 1, 0.0)
+            result[i, this.cols - 1] = 0.0
         }
 
         return result
