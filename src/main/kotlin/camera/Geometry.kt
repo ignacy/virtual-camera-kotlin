@@ -43,11 +43,12 @@ fun draw(line: Line3D, c: DrawingContext, color: Color) {
         isVisible(line.end) && isVisible(line.start) -> Pair(projectTo2D(line.start, c), projectTo2D(line.end, c))
         isVisible(line.end) && !isVisible(line.start) -> transformAndCut(line.end, line.start, c)
         isVisible(line.start) && !isVisible(line.end) -> transformAndCut(line.start, line.end, c)
-        else -> {
-            TODO("Should we handle case like this?")
-        }
+        else -> { Pair(null, null) }
     }
-    c.graphics.drawLine(p1.x.toInt(), p1.y.toInt(), p2.x.toInt(), p2.y.toInt())
+
+    if (p1 != null && p2 != null) {
+        c.graphics.drawLine(p1.x.toInt(), p1.y.toInt(), p2.x.toInt(), p2.y.toInt())
+    }
 }
 
 fun transformAndCut(
