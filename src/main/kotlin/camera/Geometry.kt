@@ -13,26 +13,24 @@ fun fromVector(vector : Matrix) : Point3D = Point3D(vector.at(0, 0), vector.at(0
 fun toVector(point : Point3D) : Matrix = algebra.vector(point.x, point.y, point.z, 1.0)
 fun isVisible(camera: Camera, point: Point3D): Boolean = point.y >= (camera.y + camera.planeDistance)
 fun isOnViewPlane(p: Point3D, c: DrawingContext): Boolean = p.y == c.scene.x + c.camera.planeDistance
-fun transform(point : Point3D, context: DrawingContext) : Point2D {
+fun transform(p : Point3D, context: DrawingContext) : Point2D {
     with (context) {
-        val k = camera.planeDistance / (point.y - camera.y)
-        val newX = (k * point.x + scene.x)
-        val newZ = (scene.z - k * point.z)
+        val k = camera.planeDistance / (p.y - camera.y)
+        val newX = (k * p.x + scene.x)
+        val newZ = (scene.z - k * p.z)
         return Point2D(newX, newZ)
     }
 }
-fun multiply(point: Point3D, translation: Matrix) : Point3D {
+fun multiply(p: Point3D, translation: Matrix) : Point3D {
     val result = Array(4) { 0.0 }
 
     for (w in 0..3) {
         result[w] = 0.0
         for (k in 0..3) {
-            result[w] += translation.at(w, k) *
-                    toVector(point).at(k, 0)
+            result[w] += translation.at(w, k) * toVector(p).at(k, 0)
         }
     }
-    val finalResult = Matrix(arrayOf(result)).normalized()
-    return fromVector(finalResult)
+    return fromVector(Matrix(arrayOf(result)).normalized())
 }
 
 fun multiplyLine(line: Line3D, translation: Matrix): Line3D = Line3D(multiply(line.start, translation), multiply(line.end, translation))
@@ -55,17 +53,17 @@ fun transformAndCut(
         b: Point3D,
         c: DrawingContext
 ): Pair<Point2D, Point2D> {
-    if (isOnViewPlane(a, c)) {
+    return if (isOnViewPlane(a, c)) {
         val nowy1 = Point2D(
                 a.x + c.scene.x,
                 c.scene.z - a.z
         )
-        return Pair(nowy1, Point2D(nowy1.x, nowy1.y))
+        Pair(nowy1, Point2D(nowy1.x, nowy1.y))
     } else {
         val k = (a.y - (c.camera.y + c.camera.planeDistance)) / (a.y - b.y)
         val x = a.x + (b.x - a.x) * k
         val z = a.z + (b.z - a.z) * k
-        return Pair(transform(a, c), Point2D(c.scene.x + x, c.scene.z - z))
+        Pair(transform(a, c), Point2D(c.scene.x + x, c.scene.z - z))
     }
 }
 
