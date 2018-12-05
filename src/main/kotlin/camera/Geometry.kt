@@ -8,7 +8,7 @@ data class Point2D(val x: Double, val y: Double)
 data class Point3D(val x: Double, val y: Double, val z: Double)
 data class Line3D(val start: Point3D, val end: Point3D)
 
-fun pointFromVectorMatrix(v : Matrix) : Point3D = Point3D(v.at(0, 0), v.at(0, 1), v.at(0, 2))
+fun pointFromVectorMatrix(v : Matrix) : Point3D = Point3D(v[0, 0], v[0, 1], v[0, 2])
 fun pointToVectorMatrix(p : Point3D) : Matrix = algebra.vector(p.x, p.y, p.z, 1.0)
 
 fun projectTo2D(p : Point3D, context: DrawingContext) : Point2D {
@@ -26,7 +26,7 @@ fun transformLine(line: Line3D, translation: Matrix): Line3D {
         for (w in 0..3) {
             result[w] = 0.0
             for (k in 0..3) {
-                result[w] += translation.at(w, k) * pointToVectorMatrix(p).at(k, 0)
+                result[w] += translation[w, k] * pointToVectorMatrix(p)[k, 0]
             }
         }
         return pointFromVectorMatrix(v = Matrix(arrayOf(result)).normalized())
