@@ -1,9 +1,11 @@
 package gui
 
+import camera.Camera
+import camera.Scene
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
-class KeyHandler(var session: Session) : KeyListener {
+class KeyHandler(private val camera : Camera, private val scene : Scene, private val canvas : Canvas) : KeyListener {
         override fun keyTyped(e: KeyEvent?) {
         }
 
@@ -13,29 +15,29 @@ class KeyHandler(var session: Session) : KeyListener {
         override fun keyPressed(e: KeyEvent?) {
             when(e!!.keyCode) {
                 //Rotations
-                KeyEvent.VK_Z -> session.rotateZLeft()
-                KeyEvent.VK_X -> session.rotateZRight()
-                KeyEvent.VK_C -> session.rotateYLeft()
-                KeyEvent.VK_V -> session.rotateYRight()
-                KeyEvent.VK_B -> session.rotateXLeft()
-                KeyEvent.VK_N -> session.rotateXRight()
+                KeyEvent.VK_Z -> scene.rotateZLeft()
+                KeyEvent.VK_X -> scene.rotateZRight()
+                KeyEvent.VK_C -> scene.rotateYLeft()
+                KeyEvent.VK_V -> scene.rotateYRight()
+                KeyEvent.VK_B -> scene.rotateXLeft()
+                KeyEvent.VK_N -> scene.rotateXRight()
 
                 // Arrows
-                KeyEvent.VK_LEFT -> session.moveLeft()
-                KeyEvent.VK_RIGHT -> session.moveRight()
-                KeyEvent.VK_UP -> session.moveUp()
-                KeyEvent.VK_DOWN -> session.moveDown()
+                KeyEvent.VK_LEFT -> scene.moveLeft()
+                KeyEvent.VK_RIGHT -> scene.moveRight()
+                KeyEvent.VK_UP -> scene.moveUp()
+                KeyEvent.VK_DOWN -> scene.moveDown()
 
                 // WSAD
-                KeyEvent.VK_A -> session.moveLeft()
-                KeyEvent.VK_D -> session.moveRight()
-                KeyEvent.VK_W -> session.moveCloser()
-                KeyEvent.VK_S -> session.moveFurther()
+                KeyEvent.VK_A -> scene.moveLeft()
+                KeyEvent.VK_D -> scene.moveRight()
+                KeyEvent.VK_W -> scene.moveCloser()
+                KeyEvent.VK_S -> scene.moveFurther()
 
                 //Zoom
-                KeyEvent.VK_Q -> session.zoomIn()
-                KeyEvent.VK_E -> session.zoomOut()
+                KeyEvent.VK_Q -> camera.planeDistance = camera.planeDistance + Scene.ZOOM_STEP
+                KeyEvent.VK_E -> camera.planeDistance = camera.planeDistance - Scene.ZOOM_STEP
             }
-            session.repaint()
+            canvas.repaint()
         }
 }

@@ -1,7 +1,6 @@
 import camera.*
 import gui.Canvas
 import gui.KeyHandler
-import gui.Session
 
 import javax.swing.*
 import java.awt.*
@@ -24,9 +23,7 @@ class Application : JFrame() {
         val scene = Scene(objects)
         val canvas = Canvas(scene, camera)
 
-        val session = Session(camera, scene, canvas)
-
-        this.addKeyListener(KeyHandler(session))
+        this.addKeyListener(KeyHandler(camera, scene, canvas))
         this.add(canvas)
     }
 

@@ -82,5 +82,4 @@ class Scene(private var objects: List<Cuboid>) {
         val cuboids = multiplyObjects(algebra.moveFurther(Scene.LINEAR_STEP))
         this.objects = cuboids
     }
-
 }
