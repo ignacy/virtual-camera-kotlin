@@ -67,12 +67,10 @@ class Matrix(private val m: Array<Array<Double>>) {
     val rows get() = m.size
     val cols get() = m[0].size
 
-    private fun setAt(row: Int, col: Int, value: Double) {
+    operator fun get(row: Int, col: Int) = m[row][col]
+    operator fun set(row: Int, col: Int, value: Double) {
         m[row][col] = value
     }
-
-    operator fun get(row: Int, col: Int) = m[row][col]
-    operator fun set(row: Int, col: Int, value: Double) = this.setAt(row, col, value)
 
     fun multiple(b: Matrix) : Matrix {
         assert(this.cols == b.rows)
