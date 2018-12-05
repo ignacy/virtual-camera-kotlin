@@ -7,28 +7,39 @@ import java.awt.Color
 class Cuboid {
     var lines : List<Line3D> = emptyList()
     var color : Color = Color.decode("#000000")
+    lateinit var walls : Map<String, List<Point3D>>
 
-    constructor(lines : List<Line3D>, color : Color) {
-        this.lines = lines
-        this.color = color
+    constructor(l : List<Line3D>, c : Color) {
+        lines = l
+        color = c
     }
 
-    constructor(point : Point3D, length : Int, color : Color) {
-        this.color = color
-        this.lines = listOf<Line3D>(
-                Line3D(point, Point3D(point.x, point.y + length, point.z)),
-                Line3D(point, Point3D(point.x, point.y, point.z + length)),
-                Line3D(point, Point3D(point.x + length, point.y, point.z)),
-                Line3D(Point3D(point.x, point.y + length, point.z), Point3D(point.x, point.y + length, point.z + length)),
-                Line3D(Point3D(point.x, point.y + length, point.z), Point3D(point.x + length, point.y + length, point.z)),
-                Line3D(Point3D(point.x + length, point.y + length, point.z), Point3D(point.x + length, point.y + length, point.z + length)),
-                Line3D(Point3D(point.x + length, point.y + length, point.z + length), Point3D(point.x + length, point.y + length, point.z + length)),
-                Line3D(Point3D(point.x + length, point.y + length, point.z + length), Point3D(point.x + length, point.y, point.z + length)),
-                Line3D(Point3D(point.x, point.y + length, point.z + length), Point3D(point.x, point.y, point.z + length)),
-                Line3D(Point3D(point.x, point.y + length, point.z + length), Point3D(point.x + length, point.y + length, point.z + length)),
-                Line3D(Point3D(point.x, point.y, point.z + length), Point3D(point.x + length, point.y, point.z + length)),
-                Line3D(Point3D(point.x + length, point.y, point.z), Point3D(point.x + length, point.y, point.z + length)),
-                Line3D(Point3D(point.x + length, point.y, point.z), Point3D(point.x + length, point.y + length, point.z))
+    constructor(point : Point, l : Int, c : Color) {
+        val (x, y, z) = point
+        color = c
+        lines = listOf(
+                Line3D(point, Point(x, y + l, z)),
+                Line3D(point, Point(x, y, z + l)),
+                Line3D(point, Point(x + l, y, z)),
+                Line3D(Point(x, y + l, z), Point(x, y + l, z + l)),
+                Line3D(Point(x, y + l, z), Point(x + l, y + l, z)),
+                Line3D(Point(x + l, y + l, z), Point(x + l, y + l, z + l)),
+                Line3D(Point(x + l, y + l, z + l), Point(x + l, y + l, z + l)),
+                Line3D(Point(x + l, y + l, z + l), Point(x + l, y, z + l)),
+                Line3D(Point(x, y + l, z + l), Point(x, y, z + l)),
+                Line3D(Point(x, y + l, z + l), Point(x + l, y + l, z + l)),
+                Line3D(Point(x, y, z + l), Point(x + l, y, z + l)),
+                Line3D(Point(x + l, y, z), Point(x + l, y, z + l)),
+                Line3D(Point(x + l, y, z), Point(x + l, y + l, z))
+        )
+
+        walls = hashMapOf(
+            "front" to listOf(point, Point(x, y + l, z), Point(x+l, y+l, z), Point(x+l, y, z)),
+            "top" to listOf(Point(x, y+l, z), Point(x, y+l, z+l), Point(x+l, y + l, z + l), Point(x+l, y +l, z)),
+            "bottom" to listOf(point, Point(x, y, z + l), Point(x+l, y, z+l), Point(x+l, y, z)),
+            "back" to listOf(Point(x, y, z+l), Point(x+l, y, z+l), Point(x+l, y+l, z+l), Point(x, y+l, z+l)),
+            "left" to listOf(point, Point(x, y+l, z), Point(x, y +l, z + l), Point(x, y, z+l)),
+            "right" to listOf(Point(x+l, y, z), Point(x+l, y, z +l), Point(x+l, y+l, z+l), Point(x+l, y+l, z))
         )
     }
 

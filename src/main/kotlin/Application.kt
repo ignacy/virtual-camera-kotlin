@@ -1,6 +1,7 @@
 import camera.Cuboid
 import camera.Point3D
 import camera.Scene
+import camera.Camera
 import gui.Canvas
 import gui.KeyHandler
 import java.awt.Color

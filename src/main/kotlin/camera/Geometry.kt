@@ -8,6 +8,8 @@ data class Point2D(val x: Double, val y: Double)
 data class Point3D(val x: Double, val y: Double, val z: Double)
 data class Line3D(val start: Point3D, val end: Point3D)
 
+typealias Point = Point3D
+
 fun pointFromVectorMatrix(v : Matrix) : Point3D = Point3D(v[0, 0], v[0, 1], v[0, 2])
 fun pointToVectorMatrix(p : Point3D) : Matrix = algebra.vector(p.x, p.y, p.z, 1.0)
 
