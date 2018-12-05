@@ -6,6 +6,17 @@ import java.awt.Color
 
 typealias Walls = Map<String, List<Point>>
 
+fun Walls.getLines() : List<Line3D> {
+    return this.values.flatMap {
+        listOf(
+                Line3D(it[0], it[1]),
+                Line3D(it[1], it[2]),
+                Line3D(it[2], it[3]),
+                Line3D(it[3], it[0])
+        )
+    }
+}
+
 class Cuboid {
     var lines : List<Line3D> = emptyList()
     var color : Color = Color.decode("#000000")
@@ -19,30 +30,16 @@ class Cuboid {
     constructor(point : Point, l : Int, c : Color) {
         val (x, y, z) = point
         color = c
-        lines = listOf(
-                Line3D(point, Point(x, y + l, z)),
-                Line3D(point, Point(x, y, z + l)),
-                Line3D(point, Point(x + l, y, z)),
-                Line3D(Point(x, y + l, z), Point(x, y + l, z + l)),
-                Line3D(Point(x, y + l, z), Point(x + l, y + l, z)),
-                Line3D(Point(x + l, y + l, z), Point(x + l, y + l, z + l)),
-                Line3D(Point(x + l, y + l, z + l), Point(x + l, y + l, z + l)),
-                Line3D(Point(x + l, y + l, z + l), Point(x + l, y, z + l)),
-                Line3D(Point(x, y + l, z + l), Point(x, y, z + l)),
-                Line3D(Point(x, y + l, z + l), Point(x + l, y + l, z + l)),
-                Line3D(Point(x, y, z + l), Point(x + l, y, z + l)),
-                Line3D(Point(x + l, y, z), Point(x + l, y, z + l)),
-                Line3D(Point(x + l, y, z), Point(x + l, y + l, z))
+        walls = hashMapOf(
+                "front" to listOf(point, Point(x, y + l, z), Point(x+l, y+l, z), Point(x+l, y, z)),
+                "top" to listOf(Point(x, y+l, z), Point(x, y+l, z+l), Point(x+l, y + l, z + l), Point(x+l, y +l, z)),
+                "bottom" to listOf(point, Point(x, y, z + l), Point(x+l, y, z+l), Point(x+l, y, z)),
+                "back" to listOf(Point(x, y, z+l), Point(x+l, y, z+l), Point(x+l, y+l, z+l), Point(x, y+l, z+l)),
+                "left" to listOf(point, Point(x, y+l, z), Point(x, y +l, z + l), Point(x, y, z+l)),
+                "right" to listOf(Point(x+l, y, z), Point(x+l, y, z +l), Point(x+l, y+l, z+l), Point(x+l, y+l, z))
         )
 
-        walls = hashMapOf(
-            "front" to listOf(point, Point(x, y + l, z), Point(x+l, y+l, z), Point(x+l, y, z)),
-            "top" to listOf(Point(x, y+l, z), Point(x, y+l, z+l), Point(x+l, y + l, z + l), Point(x+l, y +l, z)),
-            "bottom" to listOf(point, Point(x, y, z + l), Point(x+l, y, z+l), Point(x+l, y, z)),
-            "back" to listOf(Point(x, y, z+l), Point(x+l, y, z+l), Point(x+l, y+l, z+l), Point(x, y+l, z+l)),
-            "left" to listOf(point, Point(x, y+l, z), Point(x, y +l, z + l), Point(x, y, z+l)),
-            "right" to listOf(Point(x+l, y, z), Point(x+l, y, z +l), Point(x+l, y+l, z+l), Point(x+l, y+l, z))
-        )
+        lines = walls.getLines()
     }
 
     fun draw(context: DrawingContext) = this.lines.map { draw(it, context, this.color) }
