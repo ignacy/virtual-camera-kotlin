@@ -9,7 +9,7 @@ data class Point2D(val x: Double, val y: Double)
 data class Point3D(val x: Double, val y: Double, val z: Double)
 data class Line3D(val start: Point3D, val end: Point3D)
 
-fun fromVector(vector : Matrix) : Point3D = Point3D(vector.at(0, 0), vector.at(0, 1), vector.at(0, 2))
+fun pointFromVector(vector : Matrix) : Point3D = Point3D(vector.at(0, 0), vector.at(0, 1), vector.at(0, 2))
 fun toVector(point : Point3D) : Matrix = algebra.vector(point.x, point.y, point.z, 1.0)
 fun isVisible(camera: Camera, point: Point3D): Boolean = point.y >= (camera.y + camera.planeDistance)
 fun isOnViewPlane(p: Point3D, c: DrawingContext): Boolean = p.y == c.scene.x + c.camera.planeDistance
@@ -30,7 +30,7 @@ fun multiply(p: Point3D, translation: Matrix) : Point3D {
             result[w] += translation.at(w, k) * toVector(p).at(k, 0)
         }
     }
-    return fromVector(Matrix(arrayOf(result)).normalized())
+    return pointFromVector(Matrix(arrayOf(result)).normalized())
 }
 
 fun multiplyLine(line: Line3D, translation: Matrix): Line3D = Line3D(multiply(line.start, translation), multiply(line.end, translation))
