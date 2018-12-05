@@ -34,23 +34,6 @@ fun transformLine(line: Line3D, translation: Matrix): Line3D {
     return Line3D(multiply(line.start), multiply(line.end))
 }
 
-fun draw(line: Line3D, c: DrawingContext, color: Color) {
-    fun isVisible(p: Point3D): Boolean = p.y >= (c.camera.y + c.camera.planeDistance)
-
-    c.graphics.color = color
-
-    val (p1, p2) = when {
-        isVisible(line.end) && isVisible(line.start) -> Pair(projectTo2D(line.start, c), projectTo2D(line.end, c))
-        isVisible(line.end) && !isVisible(line.start) -> transformAndCut(line.end, line.start, c)
-        isVisible(line.start) && !isVisible(line.end) -> transformAndCut(line.start, line.end, c)
-        else -> { Pair(null, null) }
-    }
-
-    if (p1 != null && p2 != null) {
-        c.graphics.drawLine(p1.x.toInt(), p1.y.toInt(), p2.x.toInt(), p2.y.toInt())
-    }
-}
-
 fun transformAndCut(
         a: Point3D,
         b: Point3D,
@@ -72,3 +55,19 @@ fun transformAndCut(
     }
 }
 
+fun draw(line: Line3D, c: DrawingContext, color: Color) {
+    fun isVisible(p: Point3D): Boolean = p.y >= (c.camera.y + c.camera.planeDistance)
+
+    c.graphics.color = color
+
+    val (p1, p2) = when {
+        isVisible(line.end) && isVisible(line.start) -> Pair(projectTo2D(line.start, c), projectTo2D(line.end, c))
+        isVisible(line.end) && !isVisible(line.start) -> transformAndCut(line.end, line.start, c)
+        isVisible(line.start) && !isVisible(line.end) -> transformAndCut(line.start, line.end, c)
+        else -> { Pair(null, null) }
+    }
+
+    if (p1 != null && p2 != null) {
+        c.graphics.drawLine(p1.x.toInt(), p1.y.toInt(), p2.x.toInt(), p2.y.toInt())
+    }
+}

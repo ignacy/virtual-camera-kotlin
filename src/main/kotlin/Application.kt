@@ -1,9 +1,12 @@
-import camera.*
+import camera.Cuboid
+import camera.Point3D
+import camera.Scene
 import gui.Canvas
 import gui.KeyHandler
-
-import javax.swing.*
-import java.awt.*
+import java.awt.Color
+import java.awt.EventQueue
+import javax.swing.JFrame
+import javax.swing.WindowConstants
 
 
 class Application : JFrame() {

@@ -2,8 +2,11 @@ package gui
 
 import camera.Camera
 import camera.Scene
-import javax.swing.*
-import java.awt.*
+import java.awt.BasicStroke
+import java.awt.Color
+import java.awt.Graphics
+import java.awt.Graphics2D
+import javax.swing.JPanel
 
 class Canvas (var scene: Scene, private val camera: Camera) : JPanel() {
     override fun paintComponent(graphics: Graphics) {
