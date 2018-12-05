@@ -10,7 +10,7 @@ data class Point3D(val x: Double, val y: Double, val z: Double)
 data class Line3D(val start: Point3D, val end: Point3D)
 
 fun pointFromVector(vector : Matrix) : Point3D = Point3D(vector.at(0, 0), vector.at(0, 1), vector.at(0, 2))
-fun toVector(point : Point3D) : Matrix = algebra.vector(point.x, point.y, point.z, 1.0)
+fun pointToVectorMatrix(point : Point3D) : Matrix = algebra.vector(point.x, point.y, point.z, 1.0)
 fun isVisible(camera: Camera, point: Point3D): Boolean = point.y >= (camera.y + camera.planeDistance)
 fun isOnViewPlane(p: Point3D, c: DrawingContext): Boolean = p.y == c.scene.x + c.camera.planeDistance
 fun transform(p : Point3D, context: DrawingContext) : Point2D {
@@ -27,7 +27,7 @@ fun multiply(p: Point3D, translation: Matrix) : Point3D {
     for (w in 0..3) {
         result[w] = 0.0
         for (k in 0..3) {
-            result[w] += translation.at(w, k) * toVector(p).at(k, 0)
+            result[w] += translation.at(w, k) * pointToVectorMatrix(p).at(k, 0)
         }
     }
     return pointFromVector(Matrix(arrayOf(result)).normalized())
