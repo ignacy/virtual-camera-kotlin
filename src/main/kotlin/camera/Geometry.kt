@@ -3,6 +3,10 @@ package camera
 import algebra.Matrix
 import gui.DrawingContext
 import java.awt.Color
+import java.awt.Polygon
+import java.awt.geom.Path2D
+
+
 
 data class Point2D(val x: Double, val y: Double)
 data class Point3D(val x: Double, val y: Double, val z: Double)
@@ -54,30 +58,25 @@ fun transformAndCut(
 }
 
 fun drawSide(points : List<Point3D>, c: DrawingContext, color: Color) {
+    fun isVisible(p: Point3D): Boolean = p.y >= (c.camera.y + c.camera.planeDistance)
     c.graphics.color = color
 
+    if (points.all(::isVisible)) {
+        val projectedPoints = points.map { projectTo2D(it, c) }
 
-    val projectedPoints = points.map { projectTo2D(it, c) }
-    val xs = projectedPoints.map { it.x.toInt() }.toIntArray()
-    val ys = projectedPoints.map { it.y.toInt() }.toIntArray()
-    c.graphics.drawPolygon(xs, ys, projectedPoints.size)
-    c.graphics.color = Color.decode("#dae1e7")
-    c.graphics.fillPolygon(xs, ys, projectedPoints.size)
+        val xs = projectedPoints.map { it.x }
+        val ys = projectedPoints.map { it.y }
+
+        val path = Path2D.Double()
+
+        path.moveTo(xs[0], ys[0])
+        for (i in 1 until xs.size) {
+            path.lineTo(xs[i], ys[i])
+        }
+        path.closePath()
+
+        c.graphics.draw(path)
+        c.graphics.fill(path)
+    }
 }
 
-/*fun drawLine(line: Any, c: DrawingContext, color: Color) {
-    fun isVisible(p: Point3D): Boolean = p.y >= (c.camera.y + c.camera.planeDistance)
-
-    c.graphics.color = color
-
-    val (p1, p2) = when {
-        isVisible(line.end) && isVisible(line.start) -> Pair(projectTo2D(line.start, c), projectTo2D(line.end, c))
-        isVisible(line.end) && !isVisible(line.start) -> transformAndCut(line.end, line.start, c)
-        isVisible(line.start) && !isVisible(line.end) -> transformAndCut(line.start, line.end, c)
-        else -> { Pair(null, null) }
-    }
-
-    if (p1 != null && p2 != null) {
-        c.graphics.drawLine(p1.x.toInt(), p1.y.toInt(), p2.x.toInt(), p2.y.toInt())
-    }
-}*/

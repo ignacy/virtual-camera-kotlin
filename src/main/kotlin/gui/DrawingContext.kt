@@ -2,10 +2,7 @@ package gui
 
 import camera.Camera
 import camera.Scene
-import java.awt.BasicStroke
-import java.awt.Color
-import java.awt.Graphics
-import java.awt.Graphics2D
+import java.awt.*
 import javax.swing.JPanel
 
 class Canvas (var scene: Scene, private val camera: Camera) : JPanel() {
@@ -18,13 +15,14 @@ class Canvas (var scene: Scene, private val camera: Camera) : JPanel() {
 }
 
 class DrawingContext {
-    val graphics : Graphics
+    val graphics : Graphics2D
     val scene : Scene
     val camera : Camera
 
     constructor(g : Graphics, scene : Scene, camera : Camera) {
         val g2 = g as Graphics2D
         g2.stroke = BasicStroke(3f)
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
         this.graphics = g2
         this.camera = camera
         this.scene = scene
