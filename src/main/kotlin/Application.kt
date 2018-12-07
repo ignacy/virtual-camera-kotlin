@@ -9,26 +9,6 @@ import java.awt.EventQueue
 import javax.swing.JFrame
 import javax.swing.WindowConstants
 
-Jestes?
-
-tak
-
-
-Bez zooma to i tak lipa ale we 2 to chyba nie pisalo by sie 
-tylko najpierw jeden pozniej drugij i by bylo
-no jak dziala to nie jest zle
-
-
-A co jest jak popiszemy i chce zrobic commit?
-Na mnie czy na ciebie bedzie?
-Czy rozmysli sie samo
-
-
-chyba na ciebie bo tak jakby dzielimy tylko edytor sam a reszte masz swoje
-
-Sprawdzmy :decode
-
-:D
 class Application : JFrame() {
     init {
         this.isResizable = false

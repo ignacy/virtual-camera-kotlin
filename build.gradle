@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.ignacy'
-version '1.1-SNAPSHOT'
+version '2-Zaslanianie'
 
 sourceCompatibility = 1.8
 
