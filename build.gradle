@@ -21,7 +21,6 @@ task fatJar(type: Jar) {
 
 repositories {
     mavenCentral()
-}
 
 sourceSets {
     main.kotlin.srcDirs += 'src/main/kotlin'
